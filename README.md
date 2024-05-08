@@ -1,4 +1,4 @@
-# aula_26_04
+# date_counter
 
 Project about day 04/26
 
