@@ -1,140 +1,154 @@
 import 'package:flutter/material.dart';
-
-import '../main.dart';
+import 'AgendamentoPage.dart';
+import 'ConsultarPage.dart'; // Importe a página de consulta aqui
+import 'ConsultarCancelamentoPage.dart';
 
 
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Calculadora de Diferença de Datas',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: DateDifferencePage(),
-    );
-  }
-}
-
-class DateDifferencePage extends StatefulWidget {
-  @override
-  _DateDifferencePageState createState() => _DateDifferencePageState();
-}
-
-class _DateDifferencePageState extends State<DateDifferencePage> {
-  late DateTime _startDate;
-  late DateTime _endDate;
-  int _differenceDays = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    // Inicializando as datas com a data atual
-    _startDate = DateTime.now();
-    _endDate = DateTime.now();
-    // Calculando a diferença inicialmente
-    _calculateDifference();
-  }
-
-  void _calculateDifference() {
-    // Calculando a diferença em dias
-    final difference = _endDate.difference(_startDate).inDays;
-    setState(() {
-      _differenceDays = difference.abs();
-    });
-  }
-
-  Future<void> _selectStartDate(BuildContext context) async {
-    final pickedStartDate = await showDatePicker(
-      context: context,
-      initialDate: _startDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedStartDate != null && pickedStartDate != _startDate) {
-      setState(() {
-        _startDate = pickedStartDate;
-      });
-      _calculateDifference();
-    }
-  }
-
-  Future<void> _selectEndDate(BuildContext context) async {
-    final pickedEndDate = await showDatePicker(
-      context: context,
-      initialDate: _endDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedEndDate != null && pickedEndDate != _endDate) {
-      setState(() {
-        _endDate = pickedEndDate;
-      });
-      _calculateDifference();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFB9CCF2),
-      body:
-      Stack(
-     children: [
-       Positioned(
-        left: -60,
-        top: 650,
-        child: CustomPaint(
-          size: Size(300, 300),
-          painter: EllipsePainter(color: Color.fromRGBO(10, 72, 233, 0.42)),
-        ),
-      ),
-      Positioned(
-        left: 206.02,
-        top: -116,
-        child: CustomPaint(
-          size: Size(300, 300),
-          painter: EllipsePainter(color: Color.fromRGBO(10, 72, 233, 0.42)),
-        ),
-      ),
-
+      backgroundColor: const Color(0xFFB9CCF2),
+      body: Stack(
+        children: [
+          Positioned(
+            left: -60,
+            top: 650,
+            child: CustomPaint(
+              size: const Size(300, 300),
+              painter: EllipsePainter(color: const Color.fromRGBO(10, 72, 233, 0.42)),
+            ),
+          ),
+          Positioned(
+            left: 206.02,
+            top: -116,
+            child: CustomPaint(
+              size: const Size(300, 300),
+              painter: EllipsePainter(color:  const Color.fromRGBO(10, 72, 233, 0.42)),
+            ),
+          ),
           Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Data de Início: ${_startDate.day}/${_startDate.month}/${_startDate.year}',
-              style: TextStyle(fontSize: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 331.0,
+                  height: 487.0,
+                  decoration: BoxDecoration(
+                    color: const Color(0x6FD9D9D9),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(height: 70.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          // navegar para tela de Agendamento
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AgendamentoPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 30.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Novo Agendamento',
+                          style: TextStyle(color: Colors.black, fontSize: 17.0),
+                        ),
+                      ),
+                      const SizedBox(height: 45.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          // navegar para tela de Consulta
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ConsultarPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 30.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Consultar Agendamento',
+                          style: TextStyle(color: Colors.black, fontSize: 17.0),
+                        ),
+                      ),
+                      const SizedBox(height: 45.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ConsultarCancelamentoPage()),
+                          );
+                          // Lógica para adicionar agendamento
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 30.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Consultar Cancelamentos',
+                          style: TextStyle(color: Colors.black, fontSize: 17.0),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 50.0),
+                ElevatedButton(
+                  onPressed: () {
+                    // Lógica para sair
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black, backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 10.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                  child: const Text(
+                      'Sair',
+                      style: TextStyle(fontSize: 17.0)
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _selectStartDate(context),
-              child: Text('Selecionar Data de Início'),
-            ),
-            SizedBox(height: 40),
-            Text(
-              'Data de Fim: ${_endDate.day}/${_endDate.month}/${_endDate.year}',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _selectEndDate(context),
-              child: Text('Selecionar Data de Fim'),
-            ),
-            SizedBox(height: 40),
-            Text(
-              'Diferença em Dias: $_differenceDays',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-     ],),
     );
-
   }
 }
+
+class EllipsePainter extends CustomPainter {
+  final Color color;
+
+  EllipsePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()..color = color;
+
+    final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    canvas.drawOval(rect, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+
