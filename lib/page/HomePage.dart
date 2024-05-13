@@ -1,3 +1,4 @@
+import 'package:aula_26_04/page/TestAPI.dart';
 import 'package:flutter/material.dart';
 import 'AgendamentoPage.dart';
 import 'ConsultarPage.dart'; // Importe a página de consulta aqui
@@ -103,7 +104,29 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TestAPI()),
+                          );
+                          // Lógica para adicionar agendamento
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 30.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Test de API',
+                          style: TextStyle(color: Colors.black, fontSize: 17.0),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+
                     ],
+
                   ),
                 ),
                 const SizedBox(height: 50.0),

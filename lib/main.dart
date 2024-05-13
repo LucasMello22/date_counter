@@ -1,10 +1,15 @@
-import 'package:date_counter/page/HomePage.dart';
+import 'package:aula_26_04/page/HomePage.dart';
 import 'package:flutter/material.dart';
 
 
-void main() {
+void main() async {
+
   runApp(MyApp());
 }
+
+//void main() {
+
+//}
 
 class MyApp extends StatelessWidget {
   @override
@@ -91,7 +96,8 @@ class _LoginFormState extends State<LoginForm> {
                 _username = value;
               });
             },
-            style: const TextStyle(color: Colors.black, fontSize: 14.0, fontFamily: 'Mulish'),
+            style: const TextStyle(
+                color: Colors.black, fontSize: 14.0, fontFamily: 'Mulish'),
             decoration: InputDecoration(
               labelText: 'Login',
               labelStyle: const TextStyle(color: Colors.black),
@@ -118,7 +124,8 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'Senha',
-              labelStyle: const TextStyle(color: Colors.black, fontSize: 14.0, fontFamily: 'Mulish'),
+              labelStyle: const TextStyle(
+                  color: Colors.black, fontSize: 14.0, fontFamily: 'Mulish'),
               fillColor: Colors.white,
               filled: true,
               focusedBorder: OutlineInputBorder(
@@ -194,4 +201,3 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 }
-
